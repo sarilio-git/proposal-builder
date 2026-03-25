@@ -2330,41 +2330,44 @@ function getIncludedFeatures(features, p) {
     const state = p.features[f.id] || {};
     if (state.included) {
       let detailText = state.detail || '';
-      // Render complex detail types as readable text
+      let outputName = (state.optional ? 'Optional: ' : '') + f.name;
+
+      // For these fields, replace the whole item name+detail with just the resolved value
       if (f.detail === 'currency_picker') {
         const d = tryParseJSON(detailText, {type:'single', currencies:[], extra:''});
         const symMap = {USD:'$USD', EUR:'€EUR', BRL:'R$BRL', GBP:'£GBP'};
+        let currs = (d.currencies||[]).map(c => symMap[c]||c);
+        if (d.extra) currs = currs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
         if (d.type === 'single') {
-          // Show the selected single currency
-          let currs = (d.currencies||[]).map(c => symMap[c]||c);
-          if (d.extra) currs = currs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
-          detailText = currs.length > 0 ? 'Single Currency: ' + currs.join(', ') : 'Single Currency';
+          outputName = currs.length > 0 ? 'Single Currency: ' + currs.join(', ') : 'Single Currency';
         } else {
-          let currs = (d.currencies||[]).map(c => symMap[c]||c);
-          if (d.extra) currs = currs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
-          detailText = 'Multiple Currencies: ' + currs.join(', ');
+          outputName = 'Multiple Currencies: ' + currs.join(', ');
         }
+        detailText = '';
+      } else if (f.detail === 'language_picker') {
+        const d = tryParseJSON(detailText, {type:'single', languages:[], extra:''});
+        let langs = (d.languages||[]);
+        if (d.extra) langs = langs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
+        if (d.type === 'single') {
+          outputName = langs.length > 0 ? 'Single Language: ' + langs.join(', ') : 'Single Language';
+        } else {
+          outputName = 'Multiple Languages: ' + langs.join(', ');
+        }
+        detailText = '';
+      } else if (f.detail === 'single_multi') {
+        // Replace "Single or Multi-Entity" with just the selected value e.g. "Single Entity"
+        outputName = detailText || f.name;
+        detailText = '';
       } else if (f.detail === 'radio') {
         const d = tryParseJSON(detailText, {selected:''});
         detailText = d.selected || detailText;
-      } else if (f.detail === 'language_picker') {
-        const d = tryParseJSON(detailText, {type:'single', languages:[], extra:''});
-        if (d.type === 'single') {
-          let langs = (d.languages||[]);
-          if (d.extra) langs = langs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
-          detailText = langs.length > 0 ? 'Single Language: ' + langs.join(', ') : 'Single Language';
-        } else {
-          let langs = (d.languages||[]);
-          if (d.extra) langs = langs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
-          detailText = 'Multiple Languages: ' + langs.join(', ');
-        }
       } else if (f.detail === 'segments_picker') {
         const d = tryParseJSON(detailText, {segments:['Department','Class','Location','Natural Account'], extra:''});
         let segs = (d.segments||[]);
         if (d.extra) segs = segs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
         detailText = segs.join(', ');
       }
-      result.push({ id: f.id, name: (state.optional ? 'Optional: ' : '') + f.name, detail: detailText });
+      result.push({ id: f.id, name: outputName, detail: detailText });
     }
     if (f.children) {
       result = result.concat(getIncludedFeatures(f.children, p));
