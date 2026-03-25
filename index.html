@@ -1219,6 +1219,19 @@ const MODULES = [
       { id:"1.17", name:"Bank Account Reconciliation, Transfers & Deposits" },
       { id:"1.18", name:"Financial Reports" },
       { id:"1.19", name:"Advanced Electronic Bank Payments" },
+      { id:"1.21", name:"Banking", children:[
+        { id:"1.21.1", name:"Bank Statement Import" },
+        { id:"1.21.2", name:"Bank Account Reconciliation" },
+        { id:"1.21.3", name:"Check Printing" },
+        { id:"1.21.4", name:"Transfers and Deposits" }
+      ]},
+      { id:"1.22", name:"Period Close" },
+      { id:"1.23", name:"Tax Nexuses", children:[
+        { id:"1.23.1", name:"via Avalara (See Avalara module)" }
+      ]},
+      { id:"1.24", name:"Tax Codes and Groups", children:[
+        { id:"1.24.1", name:"via Avalara (See Avalara module)" }
+      ]},
       { id:"1.20", name:"Fixed Assets Management", children:[
         { id:"1.20.1", name:"Acquire, Depreciate, Retire, Transfer and Revalue Assets" },
         { id:"1.20.2", name:"Comprehensive Support for Depreciation" },
@@ -1257,6 +1270,7 @@ const MODULES = [
       { id:"3.1", name:"Procure to Pay", children:[
         { id:"3.1.1", name:"Vendor Master" },
         { id:"3.1.2", name:"Employee Master" },
+        { id:"3.1.2b", name:"Purchase Requisitions" },
         { id:"3.1.3", name:"Purchase Orders" },
         { id:"3.1.4", name:"Purchase Order Item Receipts" },
         { id:"3.1.5", name:"Vendor Bills" },
@@ -1330,14 +1344,6 @@ const MODULES = [
       { id:"4.18", name:"Revenue Recognition", children:[
         { id:"4.18.1", name:"SaaS Subscription", detail:"text", hint:"Annual Contract, Monthly Billing, Ratably" },
         { id:"4.18.2", name:"Revenue Stream", detail:"text", hint:"Fair Value Consideration" }
-      ]},
-      { id:"4.19", name:"CRM", children:[
-        { id:"4.19.1", name:"Sales Force Automation" },
-        { id:"4.19.2", name:"Sales Forecasting and Quota Management" },
-        { id:"4.19.3", name:"Reporting and Analytics" },
-        { id:"4.19.4", name:"Upsell, Quote and Order Management" },
-        { id:"4.19.5", name:"Customer Service and Support" },
-        { id:"4.19.6", name:"Partner Relationship Management" }
       ]}
     ]
   },
@@ -1358,6 +1364,17 @@ const MODULES = [
         { id:"5.1.7", name:"Project Accounting" },
         { id:"5.1.8", name:"Analytics" }
       ]}
+    ]
+  },
+  {
+    id: 15, name: "CRM", features: [
+      { id:"15.1", name:"Sales Force Automation" },
+      { id:"15.2", name:"Sales Forecasting and Quota Management" },
+      { id:"15.3", name:"Reporting and Analytics" },
+      { id:"15.4", name:"Upsell, Quote and Order Management" },
+      { id:"15.5", name:"Customer Service and Support" },
+      { id:"15.6", name:"Partner Relationship Management" },
+      { id:"15.7", name:"Marketing Automation" }
     ]
   },
   {
@@ -1504,10 +1521,13 @@ const MODULES = [
   {
     id: 11, name: "Field Service Management (1/2)", features: [
       { id:"11.1", name:"Base FSM Deployment", children:[
-        { id:"11.1.1", name:"Process Flow Documentation" },
-        { id:"11.1.2", name:"Installation Use Case" },
-        { id:"11.1.3", name:"Maintenance Use Case" },
-        { id:"11.1.4", name:"Break Fix and Inspect & Fix Use Case" }
+        { id:"11.1.1", name:"Workforce and Task Management" },
+        { id:"11.1.2", name:"Field Technician Scheduler" },
+        { id:"11.1.3", name:"Asset Management" },
+        { id:"11.1.4", name:"Process Flows", detail:"text", hint:"e.g. Installation, Maintenance, Repair, Collection" },
+        { id:"11.1.5", name:"MRO Inventory Management" },
+        { id:"11.1.6", name:"Analytics and Reporting" },
+        { id:"11.1.7", name:"Break Fix and Inspect & Fix Use Case" }
       ]},
       { id:"11.2", name:"Mobile Deployment", children:[
         { id:"11.2.1", name:"Field Technician Mobile Screens" },
@@ -1646,7 +1666,7 @@ let proposals = {};
 let currentProposalId = null;
 let currentModuleIndex = 0;
 
-const N8N_WEBHOOK_URL = "https://n8n-2.bringitps.io/webhook-test/proposal-builder"; // Set your n8n webhook URL here
+const N8N_WEBHOOK_URL = ""; // Set your n8n webhook URL here
 
 function loadState() {
   try {
@@ -2416,7 +2436,7 @@ async function sendToN8n() {
     1: [
       { var: 'MODULE_RECORD_TO_REPORT_1', ids: ['1.1','1.1.1','1.1.2','1.2','1.3','1.4','1.5','1.6','1.7','1.7.1','1.7.2','1.7.3'] },
       { var: 'MODULE_RECORD_TO_REPORT_2', ids: ['1.8','1.9','1.10a','1.10b','1.11','1.12','1.12.1','1.13','1.13.1','1.13.2','1.13.3','1.16'] },
-      { var: 'MODULE_RECORD_TO_REPORT_3', ids: ['1.17','1.18','1.19','1.20','1.20.1','1.20.2','1.20.3','1.20.4'] }
+      { var: 'MODULE_RECORD_TO_REPORT_3', ids: ['1.17','1.18','1.19','1.21','1.21.1','1.21.2','1.21.3','1.21.4','1.22','1.23','1.23.1','1.24','1.24.1','1.20','1.20.1','1.20.2','1.20.3','1.20.4'] }
     ],
     // 2. Avalara — 2 boxes
     2: [
@@ -2425,14 +2445,14 @@ async function sendToN8n() {
     ],
     // 3. Procure to Pay — 2 boxes
     3: [
-      { var: 'MODULE_PROCURE_TO_PAY_1', ids: ['3.1','3.1.1','3.1.2','3.1.3','3.1.4','3.1.5','3.1.6','3.1.7','3.1.8','3.1.9','3.1.10','3.1.11','3.1.12','3.1.13'] },
+      { var: 'MODULE_PROCURE_TO_PAY_1', ids: ['3.1','3.1.1','3.1.2','3.1.2b','3.1.3','3.1.4','3.1.5','3.1.6','3.1.7','3.1.8','3.1.9','3.1.10','3.1.11','3.1.12','3.1.13'] },
       { var: 'MODULE_PROCURE_TO_PAY_2', ids: ['3.2','3.2.1','3.2.2','3.2.3','3.2.4','3.2.5','3.2.6','3.3','3.3.1','3.3.2','3.3.3'] }
     ],
     // 4. Order to Cash — 3 boxes
     4: [
       { var: 'MODULE_ORDER_TO_CASH_1', ids: ['4.1','4.2','4.3','4.4','4.4.1','4.4.2','4.5','4.6','4.7','4.8','4.8.1','4.8.2','4.8.3','4.9','4.10'] },
       { var: 'MODULE_ORDER_TO_CASH_2', ids: ['4.11','4.12','4.13','4.13.1','4.13.2','4.14','4.14.1','4.14.2','4.14.3','4.15','4.15.1','4.15.2','4.15.3','4.15.4','4.16','4.16.1','4.16.2','4.17','4.17.1'] },
-      { var: 'MODULE_ORDER_TO_CASH_3', ids: ['4.18','4.18.1','4.18.2','4.19','4.19.1','4.19.2','4.19.3','4.19.4','4.19.5','4.19.6'] }
+      { var: 'MODULE_ORDER_TO_CASH_3', ids: ['4.18','4.18.1','4.18.2'] }
     ],
     // 5. Project to Cash — 1 box
     5: [
@@ -2465,7 +2485,7 @@ async function sendToN8n() {
     ],
     // 11. FSM 1/2 — 2 boxes
     11: [
-      { var: 'MODULE_FSM_1_BOX1', ids: ['11.1','11.1.1','11.1.2','11.1.3','11.1.4','11.2','11.2.1','11.2.2','11.2.3','11.2.4','11.2.5','11.2.6'] },
+      { var: 'MODULE_FSM_1_BOX1', ids: ['11.1','11.1.1','11.1.2','11.1.3','11.1.4','11.1.5','11.1.6','11.1.7','11.2','11.2.1','11.2.2','11.2.3','11.2.4','11.2.5','11.2.6'] },
       { var: 'MODULE_FSM_1_BOX2', ids: ['11.3','11.3.1','11.3.2','11.3.3','11.3.4','11.3.5','11.3.6','11.3.7','11.3.8','11.3.9','11.3.10','11.3.11'] }
     ],
     // 12. FSM 2/2 — 2 boxes
@@ -2482,6 +2502,10 @@ async function sendToN8n() {
     // 14. Customizations — 1 box
     14: [
       { var: 'MODULE_CUSTOMIZATIONS_1', ids: ['16.1','16.1.1','16.1.2','16.1.3','16.1.4','16.1.5','16.1.6','16.1.7','16.1.8','16.1.9'] }
+    ],
+    // 15. CRM — 1 box
+    15: [
+      { var: 'MODULE_CRM_1', ids: ['15.1','15.2','15.3','15.4','15.5','15.6','15.7'] }
     ]
   };
 
