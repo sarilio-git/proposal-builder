@@ -1646,7 +1646,7 @@ let proposals = {};
 let currentProposalId = null;
 let currentModuleIndex = 0;
 
-const N8N_WEBHOOK_URL = "https://n8n-2.bringitps.io/webhook-test/proposal-builder"; 
+const N8N_WEBHOOK_URL = "https://n8n-2.bringitps.io/webhook-test/proposal-builder"; // Set your n8n webhook URL here
 
 function loadState() {
   try {
@@ -2333,10 +2333,13 @@ function getIncludedFeatures(features, p) {
       // Render complex detail types as readable text
       if (f.detail === 'currency_picker') {
         const d = tryParseJSON(detailText, {type:'single', currencies:[], extra:''});
+        const symMap = {USD:'$USD', EUR:'€EUR', BRL:'R$BRL', GBP:'£GBP'};
         if (d.type === 'single') {
-          detailText = 'Single Currency';
+          // Show the selected single currency
+          let currs = (d.currencies||[]).map(c => symMap[c]||c);
+          if (d.extra) currs = currs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
+          detailText = currs.length > 0 ? 'Single Currency: ' + currs.join(', ') : 'Single Currency';
         } else {
-          const symMap = {USD:'$USD', EUR:'€EUR', BRL:'R$BRL', GBP:'£GBP'};
           let currs = (d.currencies||[]).map(c => symMap[c]||c);
           if (d.extra) currs = currs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
           detailText = 'Multiple Currencies: ' + currs.join(', ');
@@ -2347,7 +2350,9 @@ function getIncludedFeatures(features, p) {
       } else if (f.detail === 'language_picker') {
         const d = tryParseJSON(detailText, {type:'single', languages:[], extra:''});
         if (d.type === 'single') {
-          detailText = 'Single Language';
+          let langs = (d.languages||[]);
+          if (d.extra) langs = langs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
+          detailText = langs.length > 0 ? 'Single Language: ' + langs.join(', ') : 'Single Language';
         } else {
           let langs = (d.languages||[]);
           if (d.extra) langs = langs.concat(d.extra.split(',').map(x=>x.trim()).filter(Boolean));
