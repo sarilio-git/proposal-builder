@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BringIT — NetSuite Proposal Builder</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="https://github.com/sarilio-git/proposal-builder/blob/main/192.png?raw=true">
+<link rel="icon" type="image/png" href="https://github.com/sarilio-git/proposal-builder/blob/main/192.png?raw=true">
 <style>
   :root {
     --dark-green: #0e1713;
@@ -983,6 +985,118 @@
     .builder-main { margin-left: 0; }
     #screen-builder { flex-direction: column; }
   }
+
+  /* Custom feature inputs */
+  .custom-feature-wrap {
+    border: 1px dashed rgba(125,191,65,0.25);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    background: rgba(125,191,65,0.03);
+  }
+  .custom-input {
+    background: var(--dark-green);
+    border: 1px solid rgba(125,191,65,0.2);
+    border-radius: 6px;
+    padding: 7px 12px;
+    color: var(--white);
+    font-family: Roboto, sans-serif;
+    font-size: 13px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+  .custom-input:focus { border-color: var(--green); }
+  .custom-sub-input {
+    background: var(--dark-green);
+    border: 1px solid rgba(125,191,65,0.12);
+    border-radius: 5px;
+    padding: 6px 10px;
+    color: var(--white);
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    outline: none;
+    flex: 1;
+    transition: border-color 0.2s;
+  }
+  .custom-sub-input:focus { border-color: var(--green); }
+  .add-custom-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1px dashed rgba(125,191,65,0.3);
+    border-radius: 8px;
+    color: var(--green);
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 12px;
+    transition: all 0.15s;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .add-custom-btn:hover { background: rgba(125,191,65,0.06); border-color: var(--green); }
+
+  /* Presentation slide */
+  .pres-slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 64px;
+    overflow-y: auto;
+  }
+  .pres-module-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .pres-module-title {
+    font-family: Roboto, sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 40px;
+    color: var(--white);
+  }
+  .pres-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    flex: 1;
+  }
+  .pres-feature-item {
+    background: var(--sup-dark-green);
+    border: 1px solid rgba(125,191,65,0.15);
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  .pres-feature-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .pres-feature-detail {
+    font-size: 12px;
+    color: var(--green);
+    font-style: italic;
+  }
+  .pres-sub-item {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    padding: 2px 0 2px 12px;
+    border-left: 2px solid rgba(125,191,65,0.2);
+    margin-top: 4px;
+  }
+
 </style>
 </head>
 <body>
@@ -992,13 +1106,7 @@
   <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--dark-green)">
     <div style="text-align:center;width:320px">
       <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:40px">
-        <div style="width:48px;height:48px">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-            <circle cx="50" cy="50" r="44" fill="none" stroke="#7dbf41" stroke-width="7" stroke-linecap="round" stroke-dasharray="200 80" stroke-dashoffset="20"/>
-            <circle cx="50" cy="50" r="30" fill="none" stroke="#7dbf41" stroke-width="6" stroke-linecap="round" stroke-dasharray="130 60" stroke-dashoffset="-10"/>
-            <circle cx="50" cy="50" r="16" fill="none" stroke="#7dbf41" stroke-width="5" stroke-linecap="round" stroke-dasharray="65 35" stroke-dashoffset="5"/>
-          </svg>
-        </div>
+        <div style="width:48px;height:48px"><img src="https://github.com/sarilio-git/proposal-builder/blob/main/192.png?raw=true" style="width:48px;height:48px;object-fit:contain"></div>
         <div style="text-align:left">
           <div style="font-family:Roboto,sans-serif;font-size:22px;font-weight:900;letter-spacing:0.05em;color:var(--white)">BRING IT</div>
           <div style="font-size:11px;color:var(--concrete);letter-spacing:0.12em;text-transform:uppercase;font-weight:300">Proposal Builder</div>
@@ -1037,13 +1145,7 @@
 <div id="screen-home" class="screen">
   <div class="home-header">
     <div class="logo-area">
-      <div class="logo-mark">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#7dbf41" stroke-width="7" stroke-linecap="round" stroke-dasharray="200 80" stroke-dashoffset="20"/>
-          <circle cx="50" cy="50" r="30" fill="none" stroke="#7dbf41" stroke-width="6" stroke-linecap="round" stroke-dasharray="130 60" stroke-dashoffset="-10"/>
-          <circle cx="50" cy="50" r="16" fill="none" stroke="#7dbf41" stroke-width="5" stroke-linecap="round" stroke-dasharray="65 35" stroke-dashoffset="5"/>
-        </svg>
-      </div>
+      <div class="logo-mark"><img src="https://github.com/sarilio-git/proposal-builder/blob/main/192.png?raw=true" style="width:42px;height:42px;object-fit:contain"></div>
       <div>
         <div class="logo-text">BRING IT</div>
         <div class="logo-sub">Proposal Builder</div>
@@ -1103,6 +1205,18 @@
       <input type="text" id="new-prospect-name" placeholder="e.g. Acme Corporation" />
     </div>
     <div class="form-group">
+      <label>Sales Representative</label>
+      <select id="new-prospect-rep" class="detail-input" style="background:var(--dark-green);color:var(--white);border:1px solid rgba(125,191,65,0.2);border-radius:8px;padding:12px 16px;font-size:15px;width:100%">
+        <option value="">Select rep...</option>
+        <option value="Matt Hayton">Matt Hayton</option>
+        <option value="Omar Palacios">Omar Palacios</option>
+        <option value="Pankaj Shirsat">Pankaj Shirsat</option>
+        <option value="Ryan Fussner">Ryan Fussner</option>
+        <option value="Ryan Morales">Ryan Morales</option>
+        <option value="Zachary Goldstein">Zachary Goldstein</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label>Notes (optional)</label>
       <textarea id="new-prospect-notes" rows="3" placeholder="Any initial notes about this prospect..."></textarea>
     </div>
@@ -1125,6 +1239,7 @@
     <nav class="sidebar-nav" id="sidebar-nav"></nav>
     <div class="sidebar-actions">
       <button class="btn btn-primary" onclick="goToReview()">Review & Export →</button>
+      <button class="btn btn-ghost" onclick="enterPresentationMode()" style="margin-top:4px">▶ Present</button>
     </div>
   </div>
 
@@ -1148,14 +1263,9 @@
   <div class="review-header">
     <button class="back-btn" onclick="goToBuilder()" style="color:var(--concrete)">← Back to Builder</button>
     <div class="logo-area">
-      <div class="logo-mark" style="width:30px;height:30px">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#7dbf41" stroke-width="7" stroke-linecap="round" stroke-dasharray="200 80" stroke-dashoffset="20"/>
-          <circle cx="50" cy="50" r="30" fill="none" stroke="#7dbf41" stroke-width="6" stroke-linecap="round" stroke-dasharray="130 60" stroke-dashoffset="-10"/>
-          <circle cx="50" cy="50" r="16" fill="none" stroke="#7dbf41" stroke-width="5" stroke-linecap="round" stroke-dasharray="65 35" stroke-dashoffset="5"/>
-        </svg>
-      </div>
+      <div class="logo-mark" style="width:30px;height:30px"><img src="https://github.com/sarilio-git/proposal-builder/blob/main/192.png?raw=true" style="width:30px;height:30px;object-fit:contain"></div>
       <div class="logo-text" style="font-size:16px">BRING IT</div>
+      <div style="font-size:10px;color:var(--concrete);letter-spacing:0.1em;text-transform:uppercase;font-weight:300">Proposal Builder</div>
     </div>
   </div>
 
@@ -1795,20 +1905,23 @@ function closeNewModal() {
   document.getElementById('new-modal').classList.remove('open');
   document.getElementById('new-prospect-name').value = '';
   document.getElementById('new-prospect-notes').value = '';
+  const repEl = document.getElementById('new-prospect-rep');
+  if (repEl) repEl.value = '';
 }
 
 function createProposal() {
   const name = document.getElementById('new-prospect-name').value.trim();
   if (!name) { document.getElementById('new-prospect-name').focus(); return; }
+  const rep = document.getElementById('new-prospect-rep') ? document.getElementById('new-prospect-rep').value : '';
   const id = 'p_' + Date.now();
-  const rep = document.getElementById('user-select') ? document.getElementById('user-select').value : '';
   proposals[id] = {
     id, name,
     rep: rep,
     status: 'Active',
     notes: document.getElementById('new-prospect-notes').value.trim(),
     created: Date.now(), updated: Date.now(),
-    features: {}
+    features: {},
+    customItems: {}
   };
   saveState();
   closeNewModal();
@@ -1863,6 +1976,11 @@ function buildBuilderUI() {
       </div>
       <div id="features-${i}">
         ${renderFeatureList(m.features, 0)}
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(125,191,65,0.08)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--concrete);margin-bottom:10px">Custom Items</div>
+        <div id="custom-items-${m.id}"></div>
+        <button class="add-custom-btn" onclick="addCustomItem(${m.id})">+ Add Custom Item</button>
       </div>
       <div class="module-nav-footer">
         ${i > 0 ? `<button class="btn btn-ghost" onclick="showModule(${i-1})">← Previous</button>` : '<div></div>'}
@@ -1944,6 +2062,7 @@ function handleFeatureClick(featureId, event) {
 
   updateProgress();
   updateNavChecks();
+  if (document.getElementById('presentation-overlay').style.display !== 'none') refreshPresSlide();
 }
 
 function findParentOf(targetId, features) {
@@ -2229,6 +2348,7 @@ function showModule(index) {
   if (navBtn) navBtn.classList.add('active');
 
   document.getElementById('topbar-module-name').textContent = MODULES[index].name;
+  renderCustomItems(MODULES[index].id);
   document.querySelector('.builder-main').scrollTop = 0;
   window.scrollTo(0,0);
 }
@@ -2279,8 +2399,17 @@ function findFeatureById(id, features) {
 
 function updateProgress() {
   const p = getProposal();
-  const total = Object.values(p.features).filter(f => f.included).length;
-  // rough max
+  let total = Object.values(p.features).filter(f => f.included).length;
+  if (p.customItems) {
+    Object.values(p.customItems).forEach(items => {
+      items.forEach(item => {
+        if (item.included && item.name.trim()) {
+          total++;
+          item.children.forEach(sub => { if (sub.included && sub.name.trim()) total++; });
+        }
+      });
+    });
+  }
   const max = 180;
   const pct = Math.min(100, Math.round((total / max) * 100));
   document.getElementById('progress-fill').style.width = pct + '%';
@@ -2291,9 +2420,10 @@ function updateNavChecks() {
   const p = getProposal();
   MODULES.forEach((m, i) => {
     const allIds = getAllFeatureIds(m.features);
-    const hasAny = allIds.some(id => (p.features[id] || {}).included);
+    const hasRegular = allIds.some(id => (p.features[id] || {}).included);
+    const hasCustom = getCustomItems(m.id).some(item => item.included && item.name.trim());
     const checkEl = document.getElementById('nav-check-' + i);
-    if (checkEl) checkEl.classList.toggle('visible', hasAny);
+    if (checkEl) checkEl.classList.toggle('visible', hasRegular || hasCustom);
   });
 }
 
@@ -2317,11 +2447,14 @@ function goToReview() {
 
   MODULES.forEach(m => {
     const includedFeatures = getIncludedFeatures(m.features, p);
-    if (includedFeatures.length === 0) return;
+    const customFeats = getCustomIncludedFeatures(m.id);
+    const allFeats = [...includedFeatures, ...customFeats];
+    if (allFeats.length === 0) return;
+    const includedFeaturesForDisplay = allFeats;
 
     html += `<div class="review-module">
       <div class="review-module-title">${m.id}. ${m.name}</div>
-      ${includedFeatures.map(f => `
+      ${includedFeaturesForDisplay.map(f => `
         <div class="review-feature-row">
           <span class="review-outline">${f.id}</span>
           <span class="review-name">${f.name}</span>
@@ -2332,7 +2465,7 @@ function goToReview() {
 
     exportText += `${m.id}. ${m.name.toUpperCase()}\n`;
     exportText += `${'-'.repeat(40)}\n`;
-    includedFeatures.forEach(f => {
+    includedFeaturesForDisplay.forEach(f => {
       exportText += `  [${f.id}] ${f.name}`;
       if (f.detail) exportText += ` — ${f.detail}`;
       exportText += '\n';
@@ -2517,6 +2650,16 @@ async function sendToN8n() {
     features.forEach(f => { allIncludedById[f.id] = f; });
   });
 
+  MODULES.forEach(m => {
+    const customFeats = getCustomIncludedFeatures(m.id);
+    customFeats.forEach(f => { allIncludedById['CUSTOM_' + m.id + '_' + f.id] = { ...f, _customDepth: f.depth }; });
+  });
+
+  const customByModule = {};
+  MODULES.forEach(m => {
+    customByModule[m.id] = getCustomIncludedFeatures(m.id);
+  });
+
   Object.keys(BOX_SPLITS).forEach(moduleId => {
     const boxes = BOX_SPLITS[moduleId];
     boxes.forEach(box => {
@@ -2567,10 +2710,47 @@ async function sendToN8n() {
         return lines.join('\n');
       };
       const includedIds = box.ids.filter(id => allIncludedById[id]);
-      moduleBlocks[box.var] = buildHtml(includedIds);
-      moduleBlocks[box.var + '_TEXT'] = buildPlainText(includedIds);
+      const isLastBox = boxes.indexOf(box) === boxes.length - 1;
+      const customItems = isLastBox ? (customByModule[moduleId] || []) : [];
+
+      const buildHtmlWithCustom = (ids, customs) => {
+        let html = buildHtml(ids);
+        if (customs.length > 0) {
+          if (html === '<p><em>Not included in this engagement scope.</em></p>') html = '';
+          customs.forEach(c => {
+            if (c.depth === 0) {
+              html += '<ul style="list-style-type:square;margin:0;padding-left:20px"><li>' + escHtmlStr(c.name) + '</li>';
+              const subs = customByModule[moduleId].filter(s => s.depth === 1 && s.parentId === c.id);
+              if (subs.length > 0) {
+                html += '<ul style="list-style-type:square;margin:0;padding-left:20px">';
+                subs.forEach(s => { html += '<li>' + escHtmlStr(s.name) + '</li>'; });
+                html += '</ul>';
+              }
+              html += '</ul>';
+            }
+          });
+          if (!html) html = '<p><em>Not included in this engagement scope.</em></p>';
+        }
+        return html;
+      };
+
+      const buildTextWithCustom = (ids, customs) => {
+        let text = buildPlainText(ids);
+        const topCustoms = customs.filter(c => c.depth === 0);
+        topCustoms.forEach(c => {
+          text += (text ? '\n' : '') + c.name;
+          const subs = customs.filter(s => s.depth === 1 && s.parentId === c.id);
+          subs.forEach(s => { text += '\n    ' + s.name; });
+        });
+        return text;
+      };
+
+      moduleBlocks[box.var] = buildHtmlWithCustom(includedIds, isLastBox ? customByModule[moduleId].filter(c => c.depth === 0) : []);
+      moduleBlocks[box.var + '_TEXT'] = buildTextWithCustom(includedIds, isLastBox ? customByModule[moduleId].filter(c => c.depth === 0) : []);
     });
   });
+
+  const escHtmlStr = str => (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
   const payload = {
     proposalId: p.id,
@@ -2684,10 +2864,681 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Enter') pinSubmit();
 });
 
+
+// ══════════════════════════════════════════════════════════
+// CUSTOM ITEMS
+// ══════════════════════════════════════════════════════════
+function getCustomItems(moduleId) {
+  const p = getProposal();
+  if (!p.customItems) p.customItems = {};
+  if (!p.customItems[moduleId]) p.customItems[moduleId] = [];
+  return p.customItems[moduleId];
+}
+
+function saveCustomItems(moduleId, items) {
+  const p = getProposal();
+  if (!p.customItems) p.customItems = {};
+  p.customItems[moduleId] = items;
+  p.updated = Date.now();
+  saveState();
+}
+
+function addCustomItem(moduleId) {
+  const items = getCustomItems(moduleId);
+  const item = { id: 'cust_' + moduleId + '_' + Date.now(), name: '', included: true, children: [] };
+  items.push(item);
+  saveCustomItems(moduleId, items);
+  renderCustomItems(moduleId);
+  updateProgress();
+  updateNavChecks();
+}
+
+function removeCustomItem(moduleId, itemId) {
+  let items = getCustomItems(moduleId);
+  items = items.filter(i => i.id !== itemId);
+  saveCustomItems(moduleId, items);
+  renderCustomItems(moduleId);
+  updateProgress();
+  updateNavChecks();
+}
+
+function addCustomSubItem(moduleId, itemId) {
+  const items = getCustomItems(moduleId);
+  const item = items.find(i => i.id === itemId);
+  if (!item) return;
+  item.children.push({ id: itemId + '_sub_' + Date.now(), name: '', included: true });
+  saveCustomItems(moduleId, items);
+  renderCustomItems(moduleId);
+}
+
+function removeCustomSubItem(moduleId, itemId, subId) {
+  const items = getCustomItems(moduleId);
+  const item = items.find(i => i.id === itemId);
+  if (!item) return;
+  item.children = item.children.filter(s => s.id !== subId);
+  saveCustomItems(moduleId, items);
+  renderCustomItems(moduleId);
+}
+
+function updateCustomItemName(moduleId, itemId, val) {
+  const items = getCustomItems(moduleId);
+  const item = items.find(i => i.id === itemId);
+  if (item) { item.name = val; saveCustomItems(moduleId, items); }
+}
+
+function updateCustomSubName(moduleId, itemId, subId, val) {
+  const items = getCustomItems(moduleId);
+  const item = items.find(i => i.id === itemId);
+  if (!item) return;
+  const sub = item.children.find(s => s.id === subId);
+  if (sub) { sub.name = val; saveCustomItems(moduleId, items); }
+}
+
+function toggleCustomItem(moduleId, itemId) {
+  const items = getCustomItems(moduleId);
+  const item = items.find(i => i.id === itemId);
+  if (!item) return;
+  item.included = !item.included;
+  item.children.forEach(s => s.included = item.included);
+  saveCustomItems(moduleId, items);
+  renderCustomItems(moduleId);
+  updateProgress();
+  updateNavChecks();
+}
+
+function toggleCustomSubItem(moduleId, itemId, subId) {
+  const items = getCustomItems(moduleId);
+  const item = items.find(i => i.id === itemId);
+  if (!item) return;
+  const sub = item.children.find(s => s.id === subId);
+  if (sub) { sub.included = !sub.included; saveCustomItems(moduleId, items); }
+  renderCustomItems(moduleId);
+  updateProgress();
+  updateNavChecks();
+}
+
+function renderCustomItems(moduleId) {
+  const container = document.getElementById('custom-items-' + moduleId);
+  if (!container) return;
+  const items = getCustomItems(moduleId);
+  let html = '';
+  items.forEach(function(item) {
+    const ic = item.included ? 'var(--green)' : 'rgba(107,117,110,0.4)';
+    const ib = item.included ? 'var(--green)' : 'none';
+    const ick = item.included ? '<span style="font-size:11px;color:var(--dark-green);font-weight:700">\u2713</span>' : '';
+    let subsHtml = '';
+    item.children.forEach(function(sub) {
+      const sc = sub.included ? 'var(--green)' : 'rgba(107,117,110,0.4)';
+      const sb = sub.included ? 'var(--green)' : 'none';
+      const sk = sub.included ? '<span style="font-size:10px;color:var(--dark-green);font-weight:700">\u2713</span>' : '';
+      subsHtml += '<div style="display:flex;align-items:center;gap:8px;margin-top:6px;padding-left:20px">';
+      subsHtml += '<div data-action="tsub" data-mid="'+moduleId+'" data-iid="'+item.id+'" data-sid="'+sub.id+'" style="width:18px;height:18px;border-radius:4px;border:2px solid '+sc+';background:'+sb+';cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+sk+'</div>';
+      subsHtml += '<input class="custom-sub-input" value="'+escHtml(sub.name)+'" placeholder="Sub-item name..." data-action="nsub" data-mid="'+moduleId+'" data-iid="'+item.id+'" data-sid="'+sub.id+'" />';
+      subsHtml += '<button data-action="rsub" data-mid="'+moduleId+'" data-iid="'+item.id+'" data-sid="'+sub.id+'" style="background:none;border:none;color:rgba(255,100,100,0.5);cursor:pointer;font-size:14px;padding:0 4px;flex-shrink:0">&#x2715;</button>';
+      subsHtml += '</div>';
+    });
+    html += '<div class="custom-feature-wrap">';
+    html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:'+(item.children.length > 0 ? '8':'0')+'px">';
+    html += '<div data-action="titem" data-mid="'+moduleId+'" data-iid="'+item.id+'" style="width:20px;height:20px;border-radius:5px;border:2px solid '+ic+';background:'+ib+';cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+ick+'</div>';
+    html += '<input class="custom-input" value="'+escHtml(item.name)+'" placeholder="Custom item name..." data-action="nitem" data-mid="'+moduleId+'" data-iid="'+item.id+'" />';
+    html += '<button data-action="ritem" data-mid="'+moduleId+'" data-iid="'+item.id+'" style="background:none;border:none;color:rgba(255,100,100,0.5);cursor:pointer;font-size:16px;padding:0 4px;flex-shrink:0">&#x2715;</button>';
+    html += '</div>';
+    html += subsHtml;
+    html += '<button data-action="asub" data-mid="'+moduleId+'" data-iid="'+item.id+'" style="background:none;border:none;color:var(--concrete);font-size:11px;cursor:pointer;padding:4px 0 0 20px;font-family:Roboto,sans-serif">+ Add sub-item</button>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+  container.onclick = function(e) {
+    const el = e.target.closest('[data-action]');
+    if (!el) return;
+    const a = el.dataset.action, mid = parseInt(el.dataset.mid), iid = el.dataset.iid, sid = el.dataset.sid;
+    if (a === 'titem') toggleCustomItem(mid, iid);
+    else if (a === 'ritem') removeCustomItem(mid, iid);
+    else if (a === 'asub') addCustomSubItem(mid, iid);
+    else if (a === 'tsub') toggleCustomSubItem(mid, iid, sid);
+    else if (a === 'rsub') removeCustomSubItem(mid, iid, sid);
+  };
+  container.oninput = function(e) {
+    const el = e.target.closest('[data-action]');
+    if (!el) return;
+    const a = el.dataset.action, mid = parseInt(el.dataset.mid), iid = el.dataset.iid, sid = el.dataset.sid;
+    if (a === 'nitem') updateCustomItemName(mid, iid, e.target.value);
+    else if (a === 'nsub') updateCustomSubName(mid, iid, sid, e.target.value);
+  };
+}
+
+function escHtml(str) {
+  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function getCustomIncludedFeatures(moduleId) {
+  const items = getCustomItems(moduleId);
+  const result = [];
+  items.forEach(item => {
+    if (!item.included || !item.name.trim()) return;
+    result.push({ id: item.id, name: item.name.trim(), detail: '', isCustom: true, depth: 0 });
+    item.children.forEach(sub => {
+      if (!sub.included || !sub.name.trim()) return;
+      result.push({ id: sub.id, name: sub.name.trim(), detail: '', isCustom: true, depth: 1, parentId: item.id });
+    });
+  });
+  return result;
+}
+
+// ══════════════════════════════════════════════════════════
+// PRESENTATION MODE
+// ══════════════════════════════════════════════════════════
+let presSlides = [];
+let presCurrentIndex = 0;
+let presEditOpen = false;
+
+function getSelectedModulesForPresentation() {
+  const p = getProposal();
+  const slides = [];
+  MODULES.forEach(function(m) {
+    const allIds = getAllFeatureIds(m.features);
+    const hasRegular = allIds.some(id => (p.features[id] || {}).included);
+    const hasCustom = getCustomItems(m.id).some(i => i.included && i.name.trim());
+    if (!hasRegular && !hasCustom) return;
+
+    const topIncluded = m.features.filter(function(f) {
+      if ((p.features[f.id] || {}).included) return true;
+      if (f.children && f.children.some(function(c) { return (p.features[c.id] || {}).included; })) return true;
+      return false;
+    });
+
+    if (m.id === 14 && topIncluded.length > 6) {
+      const chunks = [];
+      for (let i = 0; i < topIncluded.length; i += 6) chunks.push(topIncluded.slice(i, i + 6));
+      chunks.forEach(function(chunk, ci) {
+        slides.push(Object.assign({}, m, {
+          _slideFeatures: chunk,
+          _part: ci + 1,
+          _totalParts: chunks.length,
+          _displayName: m.name + ' (' + (ci + 1) + '/' + chunks.length + ')',
+          _baseModule: m
+        }));
+      });
+    } else {
+      slides.push(Object.assign({}, m, {
+        _slideFeatures: m.features,
+        _part: 1,
+        _totalParts: 1,
+        _displayName: m.name,
+        _baseModule: m
+      }));
+    }
+  });
+  return slides;
+}
+
+function enterPresentationMode() {
+  const p = getProposal();
+  presSlides = getSelectedModulesForPresentation();
+  if (presSlides.length === 0) {
+    alert('No modules selected yet. Select some features first.');
+    return;
+  }
+  presCurrentIndex = 0;
+  presEditOpen = false;
+
+  const overlay = document.getElementById('presentation-overlay');
+  overlay.style.display = 'flex';
+  document.getElementById('pres-prospect-name').textContent = p.name;
+  document.getElementById('pres-edit-panel').style.transform = 'translateX(100%)';
+  const viewport = document.getElementById('pres-viewport');
+  const rightArrow = document.getElementById('pres-next');
+  rightArrow.style.right = '16px';
+
+  buildPresSlides();
+  updatePresNav();
+
+  document.addEventListener('keydown', presKeyHandler);
+}
+
+function exitPresentationMode() {
+  document.getElementById('presentation-overlay').style.display = 'none';
+  presEditOpen = false;
+  document.removeEventListener('keydown', presKeyHandler);
+  updateProgress();
+  updateNavChecks();
+}
+
+function presKeyHandler(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') presNav(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') presNav(-1);
+  if (e.key === 'Escape') exitPresentationMode();
+}
+
+function buildFeatureListHtml(features, p, moduleId) {
+  const allIncluded = getIncludedFeatures(features, p);
+  const includedIds = new Set(allIncluded.map(function(f) { return f.id; }));
+
+  function renderLevel(feats, depth) {
+    let html = '';
+    feats.forEach(function(f) {
+      if (!includedIds.has(f.id)) return;
+      const match = allIncluded.find(function(x) { return x.id === f.id; });
+      if (!match) return;
+      const name = escHtml(match.name) + (match.detail ? ' <span style="color:#7dbf41;font-style:italic">— ' + escHtml(match.detail) + '</span>' : '');
+      const isTop = depth === 0;
+      const fontSize = isTop ? '19px' : depth === 1 ? '16px' : '14px';
+      const color = isTop ? '#111' : depth === 1 ? '#2a2a2a' : '#444';
+      const paddingLeft = (depth * 24) + 'px';
+      const dotSize = isTop ? '9px' : '7px';
+      const topPad = isTop ? '10px' : '4px';
+      html += '<div style="display:flex;align-items:baseline;gap:9px;padding:' + topPad + ' 0 3px ' + paddingLeft + ';break-inside:avoid">';
+      html += '<span style="width:' + dotSize + ';height:' + dotSize + ';border-radius:50%;background:#7dbf41;flex-shrink:0;margin-top:7px;display:inline-block"></span>';
+      html += '<span style="font-size:' + fontSize + ';color:' + color + ';line-height:1.5;font-family:Roboto,sans-serif">' + name + '</span>';
+      html += '</div>';
+      if (f.children && f.children.length > 0) html += renderLevel(f.children, depth + 1);
+    });
+    return html;
+  }
+
+  let html = renderLevel(features, 0);
+
+  const customItems = getCustomIncludedFeatures(moduleId);
+  customItems.filter(function(c) { return c.depth === 0; }).forEach(function(c) {
+    html += '<div style="display:flex;align-items:baseline;gap:9px;padding:8px 0 3px 0;break-inside:avoid">';
+    html += '<span style="width:8px;height:8px;border-radius:50%;background:#7dbf41;flex-shrink:0;margin-top:7px;display:inline-block"></span>';
+    html += '<span style="font-size:19px;color:#111;line-height:1.5;font-family:Roboto,sans-serif">' + escHtml(c.name) + '</span>';
+    html += '</div>';
+    customItems.filter(function(s) { return s.depth === 1 && s.parentId === c.id; }).forEach(function(s) {
+      html += '<div style="display:flex;align-items:baseline;gap:9px;padding:3px 0 3px 22px;break-inside:avoid">';
+      html += '<span style="width:6px;height:6px;border-radius:50%;background:#7dbf41;flex-shrink:0;margin-top:7px;display:inline-block"></span>';
+      html += '<span style="font-size:16px;color:#2a2a2a;line-height:1.5;font-family:Roboto,sans-serif">' + escHtml(s.name) + '</span>';
+      html += '</div>';
+    });
+  });
+
+  return html || '<p style="color:#999;font-style:italic;font-size:14px">No items selected</p>';
+}
+
+function buildBoxHtml(ids, allIncludedById) {
+  if (!ids || ids.length === 0) return '';
+  let html = '';
+
+  function renderItem(id, depth) {
+    const f = allIncludedById[id];
+    if (!f) return '';
+    const name = escHtml(f.name) + (f.detail ? ' <span style="color:#7dbf41;font-style:italic;font-size:0.9em">— ' + escHtml(f.detail) + '</span>' : '');
+    const pad = depth * 16;
+    const fs = depth === 0 ? '22px' : depth === 1 ? '19px' : '17px';
+    const fw = '400';
+    const col = depth === 0 ? '#0f0f0f' : depth === 1 ? '#2a2a2a' : '#4a4a4a';
+    const dot = depth === 0 ? 9 : 7;
+    const topPad = depth === 0 ? '12px' : '4px';
+    const botPad = '2px';
+    return '<div style="display:flex;align-items:baseline;gap:10px;padding:' + topPad + ' 0 ' + botPad + ' ' + pad + 'px">' +
+      '<span style="width:' + dot + 'px;height:' + dot + 'px;border-radius:50%;background:#7dbf41;flex-shrink:0;margin-top:8px;display:inline-block"></span>' +
+      '<span style="font-size:' + fs + ';font-weight:' + fw + ';color:' + col + ';line-height:1.55;font-family:Roboto,sans-serif">' + name + '</span>' +
+    '</div>';
+  }
+
+  ids.forEach(function(id) {
+    const depth = (id.match(/\./g) || []).length;
+    html += renderItem(id, depth);
+  });
+  return html;
+}
+
+function buildPresSlides() {
+  const track = document.getElementById('pres-slides-track');
+  const dotsEl = document.getElementById('pres-dots');
+  const modList = document.getElementById('pres-module-list');
+  const p = getProposal();
+
+  const allIncludedById = {};
+  MODULES.forEach(function(m) {
+    const features = getIncludedFeatures(m.features, p);
+    features.forEach(function(f) { allIncludedById[f.id] = f; });
+  });
+
+  track.innerHTML = presSlides.map(function(m, i) {
+    const baseId = (m._baseModule || m).id;
+    const boxes = PRES_BOX_SPLITS[baseId] || [];
+
+    const activePart = m._part || 1;
+    const totalParts = m._totalParts || 1;
+    let slideBoxes = totalParts > 1
+      ? [boxes[activePart - 1]].filter(Boolean)
+      : boxes;
+
+    // For Integrations (14) and Customizations (15): split single box into 2 columns
+    if ((baseId === 14 || baseId === 15) && slideBoxes.length === 1) {
+      const allIds = slideBoxes[0].ids || [];
+      const half = Math.ceil(allIds.length / 2);
+      slideBoxes = [
+        { ids: allIds.slice(0, half) },
+        { ids: allIds.slice(half) }
+      ];
+    }
+
+    const nCols = slideBoxes.length || 1;
+    const colW = Math.floor(100 / nCols);
+
+    const customItems = getCustomIncludedFeatures(baseId);
+
+    const columnsHtml = slideBoxes.map(function(box, ci) {
+      const ids = (box.ids || []).filter(function(id) { return !!allIncludedById[id]; });
+      let colHtml = buildBoxHtml(ids, allIncludedById);
+      if (ci === slideBoxes.length - 1 && customItems.length > 0) {
+        customItems.filter(function(c) { return c.depth === 0; }).forEach(function(c) {
+          colHtml += '<div style="display:flex;align-items:baseline;gap:8px;padding:9px 0 1px 0">';
+          colHtml += '<span style="width:8px;height:8px;border-radius:50%;background:#7dbf41;flex-shrink:0;margin-top:7px;display:inline-block"></span>';
+          colHtml += '<span style="font-size:22px;font-weight:400;color:#0f0f0f;line-height:1.55;font-family:Roboto,sans-serif">' + escHtml(c.name) + '</span>';
+          colHtml += '</div>';
+          customItems.filter(function(s) { return s.depth === 1 && s.parentId === c.id; }).forEach(function(s) {
+            colHtml += '<div style="display:flex;align-items:baseline;gap:7px;padding:2px 0 1px 14px">';
+            colHtml += '<span style="width:6px;height:6px;border-radius:50%;background:#7dbf41;flex-shrink:0;margin-top:7px;display:inline-block"></span>';
+            colHtml += '<span style="font-size:19px;font-weight:400;color:#2a2a2a;line-height:1.55;font-family:Roboto,sans-serif">' + escHtml(s.name) + '</span>';
+            colHtml += '</div>';
+          });
+        });
+      }
+      const borderRight = ci < slideBoxes.length - 1 ? 'border-right:1px solid rgba(0,0,0,0.08);' : '';
+      return '<div style="width:' + colW + '%;padding:20px 24px;' + borderRight + 'overflow-y:auto">' + (colHtml || '<p style="color:#aaa;font-style:italic;font-size:13px">Not in scope</p>') + '</div>';
+    }).join('');
+
+    const dividerStyle = nCols > 1 ? 'display:flex;align-items:stretch;' : '';
+
+    return '<div class="pres-slide" data-slide-index="' + i + '" style="display:flex;flex-direction:column;background:var(--dark-green)">' +
+      '<div style="padding:24px 36px 12px 36px;flex-shrink:0">' +
+        '<div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);margin-bottom:5px">Scope of Work</div>' +
+        '<div style="font-family:Roboto,sans-serif;font-size:32px;font-weight:800;color:var(--white);line-height:1.1">' + escHtml(m._displayName || m.name) + '</div>' +
+      '</div>' +
+      '<div style="flex:1;padding:0 36px 24px 36px;overflow:hidden">' +
+        '<div style="background:white;border-radius:12px;height:100%;' + dividerStyle + '">' +
+          columnsHtml +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  dotsEl.innerHTML = presSlides.map(function(m, i) {
+    return '<div onclick="presGoTo(' + i + ')" style="width:' + (i === presCurrentIndex ? '24' : '8') + 'px;height:8px;border-radius:4px;background:' + (i === presCurrentIndex ? 'var(--green)' : 'rgba(125,191,65,0.25)') + ';cursor:pointer;transition:all 0.2s" title="' + escHtml(m._displayName || m.name) + '"></div>';
+  }).join('');
+
+  if (modList) {
+    modList.innerHTML = presSlides.map(function(m, i) {
+      const isActive = i === presCurrentIndex;
+      return '<div data-slide-nav="' + i + '" onclick="presGoTo(' + i + ')" style="padding:9px 16px;cursor:pointer;border-left:3px solid ' + (isActive ? 'var(--green)' : 'transparent') + ';background:' + (isActive ? 'rgba(125,191,65,0.08)' : 'none') + ';transition:all 0.15s">' +
+        '<span style="font-size:12px;font-weight:' + (isActive ? '700' : '400') + ';color:' + (isActive ? 'var(--green)' : 'rgba(255,255,255,0.6)') + ';line-height:1.3;display:block">' + escHtml(m._displayName || m.name) + '</span>' +
+      '</div>';
+    }).join('');
+  }
+}
+
+function updatePresNav() {
+  const track = document.getElementById('pres-slides-track');
+  track.style.transform = 'translateX(-' + (presCurrentIndex * 100) + '%)';
+  document.getElementById('pres-slide-counter').textContent = (presCurrentIndex + 1) + ' / ' + presSlides.length;
+  document.getElementById('pres-prev').style.opacity = presCurrentIndex === 0 ? '0.3' : '1';
+  document.getElementById('pres-next').style.opacity = presCurrentIndex === presSlides.length - 1 ? '0.3' : '1';
+
+  const dotsEl = document.getElementById('pres-dots');
+  dotsEl.querySelectorAll('div').forEach(function(dot, i) {
+    dot.style.width = i === presCurrentIndex ? '24px' : '8px';
+    dot.style.background = i === presCurrentIndex ? 'var(--green)' : 'rgba(125,191,65,0.25)';
+  });
+
+  const modList = document.getElementById('pres-module-list');
+  if (modList) {
+    modList.querySelectorAll('[data-slide-nav]').forEach(function(el) {
+      const i = parseInt(el.dataset.slideNav);
+      const isActive = i === presCurrentIndex;
+      el.style.borderLeft = '3px solid ' + (isActive ? 'var(--green)' : 'transparent');
+      el.style.background = isActive ? 'rgba(125,191,65,0.08)' : 'none';
+      const label = el.querySelector('span');
+      if (label) {
+        label.style.fontWeight = isActive ? '700' : '400';
+        label.style.color = isActive ? 'var(--green)' : 'rgba(255,255,255,0.6)';
+      }
+    });
+    const activeEl = modList.querySelector('[data-slide-nav="' + presCurrentIndex + '"]');
+    if (activeEl) activeEl.scrollIntoView({ block: 'nearest' });
+  }
+
+  if (presEditOpen) renderPresEditPanel();
+}
+
+function presNav(dir) {
+  const newIndex = presCurrentIndex + dir;
+  if (newIndex < 0 || newIndex >= presSlides.length) return;
+  presCurrentIndex = newIndex;
+  updatePresNav();
+}
+
+function presGoTo(index) {
+  presCurrentIndex = index;
+  updatePresNav();
+}
+
+function toggleEditPanel() {
+  presEditOpen = !presEditOpen;
+  const panel = document.getElementById('pres-edit-panel');
+  const nextArrow = document.getElementById('pres-next');
+  if (presEditOpen) {
+    panel.style.transform = 'translateX(0)';
+    nextArrow.style.right = '376px';
+    renderPresEditPanel();
+  } else {
+    panel.style.transform = 'translateX(100%)';
+    nextArrow.style.right = '16px';
+  }
+}
+
+function renderEditFeatures(features, depth) {
+  const p = getProposal();
+  let html = '';
+  features.forEach(function(f) {
+    const state = p.features[f.id] || {};
+    const included = !!state.included;
+    const pad = depth * 14;
+    html += '<div data-edit-toggle="' + f.id + '" style="display:flex;align-items:flex-start;gap:8px;padding:5px 0 5px ' + pad + 'px;cursor:pointer;border-radius:6px">';
+    html += '<div style="width:18px;height:18px;border-radius:4px;border:2px solid ' + (included ? 'var(--green)' : 'rgba(107,117,110,0.4)') + ';background:' + (included ? 'var(--green)' : 'none') + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">';
+    if (included) html += '<span style="font-size:10px;color:var(--dark-green);font-weight:700">&#x2713;</span>';
+    html += '</div>';
+    html += '<div style="flex:1">';
+    html += '<span style="font-size:13px;color:' + (included ? 'var(--white)' : 'rgba(255,255,255,0.45)') + ';line-height:1.4">' + escHtml(f.name) + '</span>';
+    if (f.detail && included) {
+      html += '<div style="margin-top:6px">' + renderDetailInput(f) + '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+    if (f.children && f.children.length > 0) {
+      html += renderEditFeatures(f.children, depth + 1);
+    }
+  });
+  return html;
+}
+
+function renderPresEditPanel() {
+  const m = presSlides[presCurrentIndex];
+  if (!m) return;
+  const baseModule = m._baseModule || m;
+  const editContent = document.getElementById('pres-edit-content');
+
+  editContent.innerHTML =
+    '<div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:14px">' + escHtml(baseModule.name) + '</div>' +
+    '<div id="pres-edit-feat-list">' + renderEditFeatures(baseModule.features, 0) + '</div>' +
+    '<div id="custom-items-' + baseModule.id + '" style="margin-top:8px"></div>' +
+    '<button class="add-custom-btn" onclick="addCustomItem(' + baseModule.id + ')">+ Add Custom Item</button>';
+
+  const featList = document.getElementById('pres-edit-feat-list');
+  if (featList) {
+    featList.onclick = function(e) {
+      const el = e.target.closest('[data-edit-toggle]');
+      if (!el) return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      const fid = el.dataset.editToggle;
+      const featureDef = findFeatureById(fid);
+      const hasChildren = featureDef && featureDef.children && featureDef.children.length > 0;
+      const newIncluded = !(getProposal().features[fid] || {}).included;
+      if (hasChildren) {
+        getAllFeatureIds([featureDef]).forEach(function(id) { setFeatureState(id, {included: newIncluded}); });
+      } else {
+        setFeatureState(fid, {included: newIncluded});
+        const parentDef = findParentOf(fid);
+        if (parentDef) {
+          const allOff = parentDef.children.every(function(c) { return !(getProposal().features[c.id] || {}).included; });
+          if (allOff) setFeatureState(parentDef.id, {included: false});
+        }
+      }
+      updateNavChecks();
+      updateProgress();
+      refreshPresSlide();
+      renderPresEditPanel();
+    };
+  }
+
+  renderCustomItems(baseModule.id);
+}
+
+function syncFeatureStatesByModule(m) {
+  const allIds = getAllFeatureIds(m.features);
+  allIds.forEach(id => {
+    const state = getFeatureState(id);
+    const safeId = id.replace(/\./g, '-');
+    const el = document.getElementById('fi-' + safeId);
+    if (!el) return;
+    el.classList.toggle('included', state.included);
+    const body = el.querySelector(':scope > .feature-body');
+    if (body) el.classList.toggle('expanded', state.included);
+  });
+}
+
+function refreshPresSlide() {
+  buildPresSlides();
+  updatePresNav();
+}
+
+
+// ══════════════════════════════════════════════════════════
+// PRESENTATION BOX SPLITS — mirrors sendToN8n BOX_SPLITS
+// ══════════════════════════════════════════════════════════
+const PRES_BOX_SPLITS = {
+  1: [
+    { ids: ['1.1','1.1.1','1.1.2','1.2','1.3','1.4','1.5','1.6','1.7','1.7.1','1.7.2','1.7.3'] },
+    { ids: ['1.8','1.9','1.10a','1.10b','1.11','1.12','1.12.1','1.13','1.13.1','1.13.2','1.13.3','1.16'] },
+    { ids: ['1.17','1.18','1.19','1.21','1.21.1','1.21.2','1.21.3','1.21.4','1.22','1.23','1.23.1','1.24','1.24.1','1.20','1.20.1','1.20.2','1.20.3','1.20.4'] }
+  ],
+  2: [
+    { ids: ['2.1','2.1.1','2.1.2','2.1.3','2.2','2.2.1','2.2.2','2.3','2.3.1','2.3.2'] },
+    { ids: ['2.4','2.4.1','2.4.2','2.5','2.6','2.7','2.8'] }
+  ],
+  3: [
+    { ids: ['3.1','3.1.1','3.1.2','3.1.2b','3.1.3','3.1.4','3.1.5','3.1.6','3.1.7','3.1.8','3.1.9','3.1.10','3.1.11','3.1.12','3.1.13'] },
+    { ids: ['3.2','3.2.1','3.2.2','3.2.3','3.2.4','3.2.5','3.2.6','3.3','3.3.1','3.3.2','3.3.3'] }
+  ],
+  4: [
+    { ids: ['4.1','4.2','4.3','4.4','4.4.1','4.4.2','4.5','4.6','4.7','4.8','4.8.1','4.8.2','4.8.3','4.9','4.10'] },
+    { ids: ['4.11','4.12','4.13','4.13.1','4.13.2','4.14','4.14.1','4.14.2','4.14.3','4.15','4.15.1','4.15.2','4.15.3','4.15.4','4.16','4.16.1','4.16.2','4.17','4.17.1'] },
+    { ids: ['4.18','4.18.1','4.18.2'] }
+  ],
+  5: [
+    { ids: ['5.1','5.1.1','5.1.2','5.1.3','5.1.4','5.1.5','5.1.5.1','5.1.5.2','5.1.5.3','5.1.5.4','5.1.6','5.1.7','5.1.8'] }
+  ],
+  6: [
+    { ids: ['15.1','15.2','15.3','15.4','15.5','15.6','15.7'] }
+  ],
+  7: [
+    { ids: ['6.1','6.1.1','6.1.2','6.1.3','6.1.4','6.1.4.1','6.1.5','6.1.6','6.1.7','6.1.8','6.1.8.1','6.1.8.2','6.1.8.3','6.1.9','6.1.10','6.1.11','6.1.12'] },
+    { ids: ['6.2','6.2.1','6.2.2','6.2.3','6.2.4','6.2.5','6.2.6'] }
+  ],
+  8: [
+    { ids: ['7.1','7.1.1','7.1.2','7.1.3','7.1.4','7.1.5','7.1.6','7.1.7','7.1.8'] },
+    { ids: ['7.2','7.2.1','7.2.2','7.2.3','7.2.4','7.2.5'] }
+  ],
+  9: [
+    { ids: ['8.1','8.1.1','8.1.2','8.1.3','8.1.4','8.1.5','8.1.6','8.1.7','8.1.8','8.1.9','8.1.10'] }
+  ],
+  10: [
+    { ids: ['9.1','9.1.1','9.2','9.3','9.3.1','9.4','9.4.1','9.5','9.5.1','9.6','9.6.1','9.6.2','9.6.3'] },
+    { ids: ['9.7','9.7.1','9.8','9.8.1','9.9','9.9.1','9.9.2','9.9.3'] },
+    { ids: ['9.10','9.10.1','9.10.2','9.11','9.11.1','9.11.2','9.12','9.12.1','9.12.2','9.12.3'] }
+  ],
+  11: [
+    { ids: ['10.1','10.1.1','10.1.1.1','10.1.1.2','10.1.2','10.1.2.1','10.1.2.2','10.1.2.3','10.1.2.4','10.1.2.5','10.1.2.6','10.1.3','10.1.4'] },
+    { ids: ['10.2','10.2.1','10.2.1.1','10.2.1.2'] }
+  ],
+  12: [
+    { ids: ['11.1','11.1.1','11.1.2','11.1.3','11.1.4','11.1.5','11.1.6','11.1.7','11.2','11.2.1','11.2.2','11.2.3','11.2.4','11.2.5','11.2.6'] },
+    { ids: ['11.3','11.3.1','11.3.2','11.3.3','11.3.4','11.3.5','11.3.6','11.3.7','11.3.8','11.3.9','11.3.10','11.3.11'] }
+  ],
+  13: [
+    { ids: ['12.1','12.1.1','12.1.2','12.1.3','12.1.4','12.1.5','12.1.6','12.1.7','12.1.8','12.1.9','12.1.10'] },
+    { ids: ['12.2','12.2.1','12.2.2'] }
+  ],
+  14: [
+    { ids: ['13.1','13.1.1','13.1.2','13.1.3','13.1.4','13.2','13.2.1','13.2.2','13.3','13.3.1','13.3.2','13.4','13.4.1','13.4.2','13.4.3','13.5','13.5.1','13.5.2','13.5.3'] },
+    { ids: ['13.6','13.6.1','13.6.2','13.6.3','13.7','13.7.1','13.7.2','13.7.3','13.8','13.8.1','13.8.2','13.9','13.9.1','13.9.2','13.9.3','13.10','13.10.1','13.10.2','13.10.3'] },
+    { ids: ['13.11','13.11.1','13.11.2','13.12','13.12.1','13.12.2','13.12.3','13.13','13.13.1','13.13.2','13.13.3','13.14','13.14.1','13.14.2'] }
+  ],
+  15: [
+    { ids: ['16.1','16.1.1','16.1.2','16.1.3','16.1.4','16.1.5','16.1.6','16.1.7','16.1.8','16.1.9'] }
+  ]
+};
+
 // ══════════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════════
 loadState();
 </script>
+
+<!-- ══════════════════════ PRESENTATION MODE ══════════════════════ -->
+<div id="presentation-overlay" style="display:none;position:fixed;inset:0;background:var(--dark-green);z-index:2000;flex-direction:column">
+
+  <!-- Top bar -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid rgba(125,191,65,0.15);flex-shrink:0">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="width:32px;height:32px"><img src="https://github.com/sarilio-git/proposal-builder/blob/main/192.png?raw=true" style="width:32px;height:32px;object-fit:contain"></div>
+      <div>
+        <div style="font-family:Roboto,sans-serif;font-weight:800;font-size:16px;letter-spacing:0.05em;color:var(--white)">BRING IT</div>
+        <div style="font-size:10px;color:var(--concrete);letter-spacing:0.1em;text-transform:uppercase;font-weight:300">Proposal Builder</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span id="pres-prospect-name" style="font-size:14px;color:var(--concrete)"></span>
+      <span id="pres-slide-counter" style="font-size:13px;color:var(--concrete)">1 / 1</span>
+      <button onclick="toggleEditPanel()" style="background:rgba(125,191,65,0.1);border:1px solid rgba(125,191,65,0.3);color:var(--green);font-family:Roboto,sans-serif;font-size:12px;font-weight:700;padding:7px 16px;border-radius:6px;cursor:pointer;letter-spacing:0.05em">✏ EDIT</button>
+      <button onclick="exitPresentationMode()" style="background:none;border:1px solid rgba(107,117,110,0.3);color:var(--concrete);font-family:Roboto,sans-serif;font-size:12px;padding:7px 14px;border-radius:6px;cursor:pointer">✕ Exit</button>
+    </div>
+  </div>
+
+  <!-- Slides area -->
+  <div style="flex:1;display:flex;align-items:stretch;overflow:hidden;position:relative">
+
+    <!-- Left modules panel -->
+    <div id="pres-modules-panel" style="width:200px;background:var(--sup-dark-green);border-right:1px solid rgba(125,191,65,0.12);overflow-y:auto;flex-shrink:0;z-index:4">
+      <div style="padding:12px 16px 8px 16px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--concrete)">Modules</div>
+      <div id="pres-module-list"></div>
+    </div>
+
+    <!-- Left arrow -->
+    <button id="pres-prev" onclick="presNav(-1)" style="position:absolute;left:216px;top:50%;transform:translateY(-50%);z-index:10;background:rgba(14,23,19,0.8);border:1px solid rgba(125,191,65,0.2);color:var(--green);width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center">‹</button>
+    <!-- Right arrow -->
+    <button id="pres-next" onclick="presNav(1)" style="position:absolute;right:376px;top:50%;transform:translateY(-50%);z-index:10;background:rgba(14,23,19,0.8);border:1px solid rgba(125,191,65,0.2);color:var(--green);width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center">›</button>
+
+    <!-- Slide viewport -->
+    <div id="pres-viewport" style="flex:1;overflow:hidden;position:relative">
+      <div id="pres-slides-track" style="display:flex;height:100%;transition:transform 0.35s cubic-bezier(0.4,0,0.2,1)"></div>
+    </div>
+
+    <!-- Edit panel -->
+    <div id="pres-edit-panel" style="width:360px;background:var(--sup-dark-green);border-left:1px solid rgba(125,191,65,0.15);overflow-y:auto;transform:translateX(100%);transition:transform 0.3s ease;position:absolute;right:0;top:0;bottom:0;z-index:5">
+      <div style="padding:16px 20px;border-bottom:1px solid rgba(125,191,65,0.1);display:flex;align-items:center;justify-content:space-between">
+        <span style="font-family:Roboto,sans-serif;font-weight:700;font-size:14px">Edit Module</span>
+        <button onclick="toggleEditPanel()" style="background:none;border:none;color:var(--concrete);font-size:18px;cursor:pointer">✕</button>
+      </div>
+      <div id="pres-edit-content" style="padding:16px"></div>
+    </div>
+  </div>
+
+  <!-- Dot nav -->
+  <div id="pres-dots" style="display:flex;justify-content:center;gap:8px;padding:16px;flex-shrink:0"></div>
+</div>
+
 </body>
 </html>
